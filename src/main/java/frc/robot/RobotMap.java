@@ -15,9 +15,9 @@ package frc.robot;
  */
 public class RobotMap {
 
-  public static final int MOTOR_DRIVE_L1 = 0;
-  public static final int MOTOR_DRIVE_L2 = 1;
-  public static final int MOTOR_DRIVE_R1 = 2;
-  public static final int MOTOR_DRIVE_R2 = 3;
+  public static final int MOTOR_DRIVE_L1 = 2;
+  public static final int MOTOR_DRIVE_L2 = 5;
+  public static final int MOTOR_DRIVE_R1 = 7;
+  public static final int MOTOR_DRIVE_R2 = 6;
 
 }

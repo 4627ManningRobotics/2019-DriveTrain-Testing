@@ -30,9 +30,17 @@ public class Chassis extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
   }
 
+  public void setRampRate(double rate) {
+    motorL1.configOpenloopRamp(rate, 0);
+    motorL2.configOpenloopRamp(rate, 0);
+    motorR1.configOpenloopRamp(rate, 0);
+    motorR2.configOpenloopRamp(rate, 0);
+  }
+
   public void setLeftMotors(double speed) {
     motorL1.set(ControlMode.PercentOutput, -speed);
     motorL2.set(ControlMode.PercentOutput, -speed);
+
   }
 
   public void setRightMotors(double speed) {
