@@ -12,40 +12,44 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+import frc.robot.commands.GTADrive;
 
 /**
  * Add your docs here.
  */
-public class Chassis extends Subsystem {
+public class DriveTrain extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  private TalonSRX motorL1 = new TalonSRX(RobotMap.MOTOR_DRIVE_L1);
-  private TalonSRX motorL2 = new TalonSRX(RobotMap.MOTOR_DRIVE_L2);
-  private TalonSRX motorR1 = new TalonSRX(RobotMap.MOTOR_DRIVE_R1);
-  private TalonSRX motorR2 = new TalonSRX(RobotMap.MOTOR_DRIVE_R2);
+  private TalonSRX left = new TalonSRX(RobotMap.MOTOR_DRIVE_L1);
+  private TalonSRX leftFollower = new TalonSRX(RobotMap.MOTOR_DRIVE_L2);
+  private TalonSRX right = new TalonSRX(RobotMap.MOTOR_DRIVE_R1);
+  private TalonSRX rightFollower = new TalonSRX(RobotMap.MOTOR_DRIVE_R2);
+
+  public void initChassis() {
+    leftFollower.set(ControlMode.Follower, RobotMap.MOTOR_DRIVE_L1);
+    rightFollower.set(ControlMode.Follower, RobotMap.MOTOR_DRIVE_L1);
+
+  }
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new GTADrive());
   }
 
   public void setRampRate(double rate) {
-    motorL1.configOpenloopRamp(rate, 0);
-    motorL2.configOpenloopRamp(rate, 0);
-    motorR1.configOpenloopRamp(rate, 0);
-    motorR2.configOpenloopRamp(rate, 0);
+    left.configOpenloopRamp(rate, 0);
+    leftFollower.configOpenloopRamp(rate, 0);
+    right.configOpenloopRamp(rate, 0);
+    rightFollower.configOpenloopRamp(rate, 0);
   }
 
   public void setLeftMotors(double speed) {
-    motorL1.set(ControlMode.PercentOutput, -speed);
-    motorL2.set(ControlMode.PercentOutput, -speed);
-
+    left.set(ControlMode.PercentOutput, -speed);
   }
 
   public void setRightMotors(double speed) {
-    motorR1.set(ControlMode.PercentOutput, speed);
-    motorR2.set(ControlMode.PercentOutput, speed);
+    right.set(ControlMode.PercentOutput, speed);
   }
 
 }

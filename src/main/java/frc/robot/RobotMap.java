@@ -20,4 +20,9 @@ public class RobotMap {
   public static final int MOTOR_DRIVE_R1 = 7;
   public static final int MOTOR_DRIVE_R2 = 6;
 
+  public static final int AXIS_RIGHT_TRIGGER = 3;
+  public static final int AXIS_LEFT_TRIGGER = 2;
+  public static final int AXIS_LEFT_X = 0;
+  public static final double SCALE_STEERING = 0.7;
+
 }

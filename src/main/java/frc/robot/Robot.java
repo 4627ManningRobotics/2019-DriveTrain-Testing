@@ -24,7 +24,7 @@ import frc.robot.subsystems.*;
  */
 public class Robot extends TimedRobot {
 
-  public static Chassis chassis = new Chassis();
+  public static DriveTrain driveTrain = new DriveTrain();
 
   public static OI m_oi;
 
@@ -38,6 +38,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_oi = new OI();
+    driveTrain.initChassis();
     m_chooser.addDefault("Default Auto", new DriveSDRamp());
     // chooser.addObject("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);

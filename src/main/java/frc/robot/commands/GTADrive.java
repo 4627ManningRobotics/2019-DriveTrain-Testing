@@ -8,11 +8,11 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
-public class DriveSDRamp extends Command {
-  public DriveSDRamp() {
+public class GTADrive extends Command {
+  public GTADrive() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.driveTrain);
   }
@@ -20,29 +20,28 @@ public class DriveSDRamp extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    double ramp = SmartDashboard.getNumber("Ramp Rate", 0);
-    Robot.driveTrain.setRampRate(ramp);
-    Robot.driveTrain.setLeftMotors(1);
-    Robot.driveTrain.setRightMotors(1);
-    setTimeout(5);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    double throttle = Robot.m_oi.getDriverRawAxis(RobotMap.AXIS_RIGHT_TRIGGER)
+        - Robot.m_oi.getDriverRawAxis(RobotMap.AXIS_LEFT_TRIGGER);
+    double steering = Robot.m_oi.getDriverRawAxis(RobotMap.AXIS_LEFT_X) * RobotMap.SCALE_STEERING;
+
+    Robot.driveTrain.setLeftMotors(throttle + steering);
+    Robot.driveTrain.setRightMotors(throttle - steering);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return isTimedOut();
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.driveTrain.setLeftMotors(0);
-    Robot.driveTrain.setRightMotors(0);
   }
 
   // Called when another command which requires one or more of the same
