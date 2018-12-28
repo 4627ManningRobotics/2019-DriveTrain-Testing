@@ -26,12 +26,18 @@ deploy {
     }
 }
 
+repositories {
+      jcenter()
+      maven { url "https://jitpack.io" }
+}
+
 // Defining my dependencies. In this case, WPILib (+ friends), CTRE Toolsuite (Talon SRX)
 // and NavX.
 dependencies {
     compile wpilib()
     compile ctre()
     compile navx()
+    compile 'com.github.Team319:BobTrajectory:v1.0.0'
 }
 
 // Setting up my Jar File. In this case, adding all libraries into the main jar ('fat jar')
@@ -48,6 +54,8 @@ compileJava {
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
 }
+
+
 
 wrapper {
     gradleVersion = '4.9'
